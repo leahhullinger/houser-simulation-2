@@ -14,10 +14,28 @@ module.exports = {
   },
   addHouse: (req, res, next) => {
     const dbInstance = req.app.get("db");
-    const { house_name, address, city, state, zipcode } = req.body;
+    const {
+      propertyName: house_name,
+      address,
+      city,
+      state,
+      zipcode,
+      image,
+      monthlyMortgage: monthly_mortgage,
+      desiredRent: desired_rent
+    } = req.body;
 
     dbInstance
-      .add_house(house_name, address, city, state, zipcode)
+      .add_house(
+        house_name,
+        address,
+        city,
+        state,
+        zipcode,
+        image,
+        monthly_mortgage,
+        desired_rent
+      )
       .then(() => {
         res.sendStatus(200);
       })

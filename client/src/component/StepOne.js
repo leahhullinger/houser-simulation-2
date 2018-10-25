@@ -1,59 +1,48 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import routes from "../routes";
-
-const BASE_URL = "http://localhost:3007";
+import {
+  updateName,
+  updateAddress,
+  updateCity,
+  updateState,
+  updateZip
+} from "../ducks/reducer";
 
 class StepOne extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      propertyName: "",
-      address: "",
-      city: "",
-      zipcode: ""
-    };
-  }
-
-  handleInput = (e, key) => {
-    this.setState({
-      [key]: e.target.value
-    });
-  };
-  onButtonClick = () => {
-    const { propertyName, address, city, zipcode } = this.state;
-    axios.post(BASE_URL + "/api/houses", {
-      propertyName,
-      address,
-      city,
-      zipcode
-    });
-  };
   render() {
+    const {
+      updateName,
+      updateAddress,
+      updateCity,
+      updateState,
+      updateZip
+    } = this.props;
     return (
-      <div className="form-container">
-        <h1>Add New Property</h1>
-        <label>Property Name</label>
-        <input
-          className="input"
-          onChange={e => this.handleInput(e, "propertyName")}
-        />
-        <label>Address</label>
-        <input
-          className="input"
-          onChange={e => this.handleInput(e, "address")}
-        />
-        <label>City</label>
-        <input className="input" onChange={e => this.handleInput(e, "city")} />
-        <label>Zipcode</label>
-        <input
-          className="input"
-          onChange={e => this.handleInput(e, "zipcode")}
-        />
+      <div className="page-container">
+        <div className="page-header">
+          <h2>ADD NEW LISTING</h2>
+        </div>
+        <div className="form-container">
+          <label>Property Name</label>
+          <input className="input" onChange={e => updateName(e.target.value)} />
+          <label>Address</label>
+          <input
+            className="input"
+            onChange={e => updateAddress(e.target.value)}
+          />
+          <label>City</label>
+          <input classname="input" onChange={e => updateCity(e.target.value)} />
+          <label>State</label>
+          <input
+            classname="input"
+            onChange={e => updateState(e.target.value)}
+          />
+          <label>Zipcode</label>
+          <input classname="input" onChange={e => updateZip(e.target.value)} />
+        </div>
         <div>
-          <button>
+          <button classname="next-step">
             <Link to="/wizard/StepTwo">Next Step</Link>
           </button>
         </div>
@@ -61,4 +50,24 @@ class StepOne extends Component {
     );
   }
 }
-export default StepOne;
+function mapStateToProps(state) {
+  const { propertyName, address, zipcode } = state;
+  return {
+    propertyName,
+    address,
+    city: state.city,
+    state: state.state,
+    zipcode
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    updateName,
+    updateAddress,
+    updateCity,
+    updateState,
+    updateZip
+  }
+)(StepOne);

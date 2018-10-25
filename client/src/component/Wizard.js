@@ -5,7 +5,6 @@ import { Switch } from "react-router-dom";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import Routes from "../routes";
 
 const BASE_URL = "http://localhost:3007";
 
@@ -13,7 +12,9 @@ class Wizard extends Component {
   render() {
     return (
       <div>
-        <Link to="/">Cancel</Link>
+        <Link className="cancel-button" to="/">
+          Cancel
+        </Link>
         <Switch>
           <Route path="/wizard/stepOne" component={StepOne} />
           <Route path="/wizard/stepTwo" component={StepTwo} />

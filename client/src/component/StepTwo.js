@@ -1,35 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { updateImage } from "../ducks/reducer";
 import { Link } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Wizard from "./Wizard";
 
 class StepTwo extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      image: ""
-    };
-  }
-
-  handleImageInput = e => {
-    this.setState({
-      image: e.target.value
-    });
-  };
   render() {
     return (
       <div className="form-container">
+        <div className="page-header">
+          <h2>ADD NEW LISTING</h2>
+        </div>
         <div className="image-input-box">
           <label>Image URL:</label>
-          <input className="input" onChange={this.handleImageInput} />
+          <input
+            classname="input"
+            onChange={e => updateImage(e.target.value)}
+          />
         </div>
         <div>
-          <Link to="/wizard/stepOne">Previous</Link>
-          <Link to="/wizard/stepThree">Next</Link>
+          <Link className="previous-step" to="/wizard/stepOne">
+            Previous
+          </Link>
+          <Link className="next-step" to="/wizard/stepThree">
+            Next
+          </Link>
         </div>
       </div>
     );
   }
 }
-export default StepTwo;
+
+function mapStateToProps(state) {
+  return {
+    image: state.image
+  };
+}
+export default connect(
+  mapStateToProps,
+  { updateImage }
+)(StepTwo);

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getHouses } from "../ducks/reducer";
 import axios from "axios";
-import Wizard from "./Wizard";
-import StepOne from "./StepOne";
 import House from "./House";
 
+import "../App.css";
 const BASE_URL = "http://localhost:3007";
 
 class Dashboard extends Component {
@@ -22,14 +23,17 @@ class Dashboard extends Component {
   }
   render() {
     return (
-      <div>
-        <div className="dashboard-container">
-          {this.state.inventory.map(house => {
-            return <House key={house.house_id} house={house} />;
-          })}
+      <div className="page-container">
+        <div className="page-header">
+          <h2>DASHBOARD</h2>
+          <Link className="new-prop-link" to="/wizard/stepOne">
+            Add New Property
+          </Link>
         </div>
-        Dashboard
-        <Link to="/wizard/stepOne">Add Property</Link>
+        <h3>Home Listings</h3>
+        {this.state.inventory.map(house => {
+          return <House key={house.house_id} house={house} />;
+        })}
       </div>
     );
   }
