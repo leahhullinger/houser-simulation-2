@@ -1,41 +1,79 @@
 .App {
-  height: 100vh;
   background-color: #afd4c0;
 }
 
 .main-body {
   background-color: #e5f4ec;
-  height: 100vh;
   width: 60%;
   margin: 0 auto;
   padding: 20px;
   display: flex;
   justify-content: center;
 }
+.wizard-container {
+  width: 100%;
+}
 
 h2 {
   font-family: "Arial Narrow" sans-serif;
   font-size: 30px;
-  font-weight: 200;
+  font-weight: 400;
   margin: 0;
+  padding: 0;
 }
 
 .page-header {
-  border-bottom: 1px solid black;
-  align-items: baseline;
-  padding: 20px;
   display: flex;
   justify-content: space-between;
 }
 
-.new-prop-link {
+.image-box {
+  width: 150px;
+}
+
+.wizard-header {
+  border-bottom: 1px solid black;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.new-prop-button,
+.complete-button,
+.next-step,
+.previous-step,
+.cancel-button {
+  max-height: 35px;
+  max-width: 200px;
+  border-radius: 3px;
+  text-decoration: none;
+  text-align: center;
   padding: 10px;
-  color: black;
   font-family: "Arial Narrow" sans-serif;
   font-weight: 800;
-  border-radius: 3px;
+}
+
+.new-prop-button,
+.complete-button {
   background-color: #8aea92;
-  text-decoration: none;
+  color: black;
+}
+.next-step,
+.previous-step {
+  background-color: #3b5249;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #fec2c2;
+  color: black;
 }
 
 .page-container {
@@ -47,37 +85,34 @@ h2 {
   margin: 20px;
   height: 130px;
   display: flex;
-  justify-content: space-evenly;
-  padding: 20px;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .image-box,
 .info-box {
-  padding: 10px;
+  padding: 0 10px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
-  font-size: 12px;
-}
-
-.cancel-button {
-  padding: 10px;
-  color: black;
-  font-family: "Arial Narrow" sans-serif;
-  font-weight: 800;
-  border-radius: 3px;
-  background-color: #fec2c2;
-  text-decoration: none;
 }
 
 .form-container {
   padding: 20px;
-  margin: 20px;
 }
 
-.next-step,
-.previous-step {
-  background-color: #3b5249;
-  text-decoration: none;
-  border-radius: 3px;
-  color: white;
+label {
+  font-size: 14px;
+  font-family: "Arial Narrow" sans-serif;
+  font-weight: 600;
+}
+
+input {
+  margin: 5px;
+  min-width: 100px;
+}
+
+.inputs-container {
+  min-height: 200px;
+  padding: 20px 0;
 }

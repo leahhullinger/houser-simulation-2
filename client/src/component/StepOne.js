@@ -11,40 +11,43 @@ import {
 
 class StepOne extends Component {
   render() {
+    console.log(this.props);
     const {
       updateName,
       updateAddress,
       updateCity,
       updateState,
-      updateZip
+      updateZip,
+      propertyName,
+      address,
+      city,
+      state,
+      zipcode
     } = this.props;
     return (
-      <div className="page-container">
-        <div className="page-header">
-          <h2>ADD NEW LISTING</h2>
-        </div>
-        <div className="form-container">
+      <div className="form-container">
+        <div className="inputs-container">
           <label>Property Name</label>
-          <input className="input" onChange={e => updateName(e.target.value)} />
+          <input
+            value={propertyName}
+            onChange={e => updateName(e.target.value)}
+          />
           <label>Address</label>
           <input
-            className="input"
+            value={address}
             onChange={e => updateAddress(e.target.value)}
           />
           <label>City</label>
-          <input classname="input" onChange={e => updateCity(e.target.value)} />
+          <input value={city} onChange={e => updateCity(e.target.value)} />
           <label>State</label>
-          <input
-            classname="input"
-            onChange={e => updateState(e.target.value)}
-          />
+          <input value={state} onChange={e => updateState(e.target.value)} />
           <label>Zipcode</label>
-          <input classname="input" onChange={e => updateZip(e.target.value)} />
+          <input value={zipcode} onChange={e => updateZip(e.target.value)} />
         </div>
-        <div>
-          <button classname="next-step">
-            <Link to="/wizard/StepTwo">Next Step</Link>
-          </button>
+        <div className="button-container">
+          <Link className="next-step" to="/wizard/StepTwo">
+            Next Step
+          </Link>
         </div>
       </div>
     );

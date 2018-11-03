@@ -43,5 +43,17 @@ module.exports = {
         res.status(500).send(error);
         console.log(error);
       });
+  },
+  deleteHouse: (req, res, next) => {
+    const dbInstance = req.app.get("db");
+    const { house_id } = req.params;
+
+    dbInstance
+      .delete_house([house_id])
+      .then(() => res.sendStatus(200))
+      .catch(error => {
+        console.log("did not delete", error);
+        res.status(500).send(error, { errorMessage: "error at deleteProduct" });
+      });
   }
 };

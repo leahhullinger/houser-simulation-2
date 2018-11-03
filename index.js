@@ -17,6 +17,7 @@ app.use(cors());
 
 app.get("/api/houses", controller.getHouses);
 app.post("/api/add", controller.addHouse);
+app.delete("/api/houses/:house_id", controller.deleteHouse);
 
 PORT = process.env.PORT || 3007;
 app.listen(PORT, () => {

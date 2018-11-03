@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import {
   updateMortgage,
   updateDesiredRent,
   submitNewProperty
 } from "../ducks/reducer";
 
-const BASE_URL = "http://localhost:3007";
-
 class StepThree extends Component {
+  onSubmitClick = () => {
+    submitNewProperty();
+  };
+
   render() {
     const {
       propertyName,
@@ -26,13 +27,11 @@ class StepThree extends Component {
     const { updateMortgage, updateDesiredRent, submitNewProperty } = this.props;
     return (
       <div className="form-container">
-        <div className="page-header">
-          <h2>ADD NEW LISTING</h2>
-        </div>
-        <div>
+        <div className="inputs-container">
           <label>Monthly Mortgage Amount:</label>
           <input
             className="input"
+            value={monthlyMortgage}
             onChange={e => updateMortgage(e.target.value)}
           />
           {/* <div className="recommended-rent">
@@ -44,14 +43,18 @@ class StepThree extends Component {
           <label>Desired Rent Amount:</label>
           <input
             className="input"
+            value={desiredRent}
             onChange={e => updateDesiredRent(e.target.value)}
           />
         </div>
-        <div>
-          <Link to="/wizard/stepOne">Previous</Link>
-          <button
-            nameClass="complete"
-            onClick={e =>
+        <div className="button-container">
+          <Link className="previous-step" to="/wizard/stepTwo">
+            Previous
+          </Link>
+          <Link
+            className="complete-button"
+            to="/"
+            onClick={() =>
               submitNewProperty(
                 propertyName,
                 address,
@@ -63,7 +66,9 @@ class StepThree extends Component {
                 desiredRent
               )
             }
-          />
+          >
+            Complete
+          </Link>
         </div>
       </div>
     );

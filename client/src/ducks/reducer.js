@@ -22,7 +22,6 @@ const UPDATE_IMAGE = "UPDATE_IMAGE";
 const UPDATE_MORTGAGE = "UPDATE_MORTGAGE";
 const UPDATE_DESIRE_RENT = "UPDATE_DESIRE_RENT";
 const SUBMIT_NEW_PROPERTY = "SUBMIT_NEW_PROPERTY";
-const GET_HOUSES = "GET_HOUSES";
 
 function reducer(state = initialState, action) {
   switch (action.type) {
@@ -50,10 +49,12 @@ function reducer(state = initialState, action) {
     case UPDATE_DESIRE_RENT:
       console.log(action.payload);
       return { ...state, desiredRent: action.payload };
+    // Add a RESET_ADD_PROPERTY
     case SUBMIT_NEW_PROPERTY:
       console.log(action.payload);
       return {
-        ...state,
+        inventory: [...this.inventory, action.payload],
+        // set to initial state,
         propertyName: action.payload,
         address: action.payload,
         city: action.payload,
@@ -63,8 +64,6 @@ function reducer(state = initialState, action) {
         monthlyMortgage: action.payload,
         desiredRent: action.payload
       };
-    case GET_HOUSES:
-      return { ...state, inventory: action.payload };
     default:
       return state;
   }
@@ -145,24 +144,30 @@ export function submitNewProperty(
   );
   return {
     type: SUBMIT_NEW_PROPERTY,
-    payload: axios.post(BASE_URL + "/api/add", {
-      propertyName,
-      address,
-      city,
-      state,
-      zipcode,
-      image,
-      monthlyMortgage,
-      desiredRent
-    })
-  };
-}
-
-export function getHouses() {
-  const request = axios.get(BASE_URL + "/api/houses");
-  return {
-    type: GET_HOUSES,
-    payload: request
+    payload: axios
+      .post(BASE_URL + "/api/add", {
+        propertyName,
+        address,
+        city,
+        state,
+        zipcode,
+        image,
+        monthlyMortgage,
+        desiredRent
+      })
+      .then(response => {
+        return {
+          inventory: [],
+          propertyName: "",
+          address: "",
+          city: "",
+          state: "",
+          zipcode: "",
+          image: "",
+          monthlyMortgage: 0,
+          desiredRent: 0
+        };
+      })
   };
 }
 

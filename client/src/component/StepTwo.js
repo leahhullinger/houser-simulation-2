@@ -7,22 +7,19 @@ class StepTwo extends Component {
   render() {
     return (
       <div className="form-container">
-        <div className="page-header">
-          <h2>ADD NEW LISTING</h2>
-        </div>
-        <div className="image-input-box">
-          <label>Image URL:</label>
+        <div className="inputs-container">
+          <label>Image URL</label>
           <input
-            classname="input"
-            onChange={e => updateImage(e.target.value)}
+            value={this.props.image}
+            onChange={e => this.props.updateImage(e.target.value)}
           />
         </div>
-        <div>
+        <div className="button-container">
           <Link className="previous-step" to="/wizard/stepOne">
             Previous
           </Link>
           <Link className="next-step" to="/wizard/stepThree">
-            Next
+            Next Step
           </Link>
         </div>
       </div>

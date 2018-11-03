@@ -1,11 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
 function House(props) {
   return (
     <div>
       <div className="house-info-container">
-        <div className="image-box">{props.house.image}</div>
+        <img className="image-box" src={props.house.image} />
         <div className="info-box">
+          <button
+            className="delete"
+            onClick={() => props.delete(props.house.house_id)}
+          >
+            {" "}
+            <span> &#x2715; </span>
+          </button>
           <div className="info-display">
             <label>Property Name: </label>
             {props.house.house_name}{" "}
@@ -15,7 +22,7 @@ function House(props) {
             {props.house.address}
           </div>
           <div className="info-display">
-            <label>City: </label> props.house.city}
+            <label>City: </label> {props.house.city}
           </div>
           <div className="info-display">
             <label>State: </label>
@@ -28,11 +35,9 @@ function House(props) {
         </div>
         <div className="info-box">
           <label>Monthly Mortgage Amount: </label>
-          {props.house.monthlyMortgage}{" "}
-        </div>
-        <div className="info-box">
+          {props.house.monthly_mortgage}
           <label>Desired Monthly Rent: </label>
-          {props.house.desiredRent}{" "}
+          {props.house.desired_rent}{" "}
         </div>
       </div>
     </div>
